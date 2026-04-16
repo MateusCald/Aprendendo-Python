@@ -52,18 +52,89 @@ else:
 #Entre 12h e 18h, exibir "Boa tarde";
 #Após 18h, exibir "Boa noite".z
 
+def saudacao_personalizada(hora, minuto):
+    if not  (0 <= hora <= 23 and 0 <= minuto <= 59):
+        return ("Horário inválido, digite novamente: ")
+        
+    if hora < 12:
+        return ("Bom dia!")
+    elif hora < 18:
+        return ("Boa tarde!")
+    else:
+        return ("Boa noite!")
+
+
+try:
+    horario = input("Digite a hora atual (HH:MM): ").strip()
+
+    hora, minuto = horario.split(":")
+
+    if not horario:
+        raise ValueError
+        
+    hora = int(hora)
+    minuto = int(minuto)
+
+    print (f"Horário formatado: {hora:02d}:{minuto:02d}")
+    print (saudacao_personalizada(hora, minuto))
+except ValueError:
+    print("Formato incorreto, siga conforme solicitado (Ex 09:30): ")
 
 
 #4Pedro está criando um sistema de cadastro de produtos para sua loja e percebeu que todos os números de telefone dos clientes estão armazenados como strings. No entanto, para facilitar buscas e validações, ele precisa que esses números sejam tratados como inteiros.
 #Dado o seguinte código com uma lista de números de telefone armazenados incorretamente como str, faça duas funções, uma que converte os tipos para inteiro e outra que verifica se a conversão foi feita corretamente e todos os números de telefone são inteiros:
 
+def converter_telefones(lista):
+    telefones_convertidos = []
+    for telefone in lista:
+        try:
+            telefones_convertidos.append(int(telefone))
+        except ValueError:
+            raise ValueError (f"Erro: O número de telefone '{telefone}' não é válido.")
+    return telefones_convertidos
 
+def validar_conversao(entrada):
+    if not entrada:
+        raise ValueError("Erro: A lista de telefones está vazia.")
+    for telefone in entrada:
+        if not isinstance(telefone, int):
+            raise ValueError("Erro na conversão.")
+    return "Todos os números foram convertidos corretamente."
+
+entrada = input("Digite os números de telefone separados por vírgula: ").split(",")
+
+try:
+    conversao = converter_telefones(entrada)
+    print(validar_conversao(conversao))
+except ValueError as erro:
+    print(erro)
 
 
 #5Carlos trabalha em um comércio e precisa saber o valor total de vendas realizadas no dia. As vendas são informadas em uma única linha separadas por espaços.
 
 #Sua tarefa é criar um programa que receba essa linha, converta os valores para números e exiba o total.
 
+def total_vendas(vendas):
+    if not vendas:
+        raise ValueError("Nenhum valor informado.")
+    
+    total = 0
+
+    for venda in vendas:
+        try:
+            total += float(venda)
+        except ValueError:
+            raise ValueError (f"O valor '{venda}' não é um número válido.")
+    return (total)
+
+try:
+    vendas = input("Digite os valores das vendas separadas por espaço:").strip().replace(",",".").split()
+
+    soma = total_vendas(vendas)
+
+    print(f"O valor total das vendas é de: R$ {soma:.2f}")
+except ValueError as erro:
+    print(erro)
 
 
 #Lucas está desenvolvendo um sistema para gerar relatórios financeiros e precisa filtrar apenas os valores pares de uma lista de números informada pelo usuário. Crie um programa que receba uma lista de números e exiba apenas os pares usando a função filter().
