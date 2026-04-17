@@ -139,14 +139,44 @@ except ValueError as erro:
 
 #Lucas está desenvolvendo um sistema para gerar relatórios financeiros e precisa filtrar apenas os valores pares de uma lista de números informada pelo usuário. Crie um programa que receba uma lista de números e exiba apenas os pares usando a função filter().
 
+numeros = list(map(int, input("Digite os numeros separados por espaço: ").split()))
+
+pares = list(filter(lambda x: x % 2 == 0, numeros))
+
+print (f"Os números pares são: {pares}")
 
 
 #Clara está gerenciando o estoque de sua loja e recebeu duas listas separadas: uma contendo os nomes dos produtos e outras com seus respectivos preços. Para facilitar a organização, ela precisa combinar essas listas de forma que cada produto seja associado ao seu preço. Crie um programa que junte as listas e exiba o resultado no formato produto: preço
 
+produtos = input("Digite os produtos separados por espaço: ").split()
+
+precos =  map(float,input("Digite os precos separados por espaço: ").replace(",",".").split())
+
+precos_dos_produtos = list(zip(produtos, precos))
+
+for produto, preco in precos_dos_produtos:
+    print(f"{produto.strip()}:{preco:.2f}")
 
 
 #Joana está participando de um processo seletivo para uma vaga de desenvolvedora e recebeu um desafio técnico de criar uma calculadora para somar, subtrair, multiplicar e dividir dois números. Sua tarefa é criar um programa usando funções lambda que receba dois números e um operador matemático escolhido pelo usuário (+, -, * ou /) e exiba o resultado correspondente.
 
+operacoes = {
+    "+": lambda x, y: x + y,
+    "-": lambda x, y: x - y,
+    "*": lambda x, y: x * y,
+    "/": lambda x, y: x / y if y != 0 else "Erro: Não pode ser feito divisão por 0!"
+}
+
+x = float(input("Digite o primeiro número para operação: ").replace(",","."))
+
+y = float(input("Digite o segundo número para operação: ").replace(",","."))
+
+operacao = input("Escolha a operação que deseja fazer (+, -, *, /): ")
+
+if operacao in operacoes:
+    print (f"O resultado é: {operacoes[operacao](x, y):.2f}:")
+else:
+    print("Operação inválida!")
 
 #Miguel está desenvolvendo um sistema de cupons de desconto e precisa de uma forma para aplicar diferentes taxas de desconto sobre os valores das compras.Diante deste problema, crie uma closure que gere uma função capaz de calcular o preço final com um desconto fixo definido pelo usuário.
 
