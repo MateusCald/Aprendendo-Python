@@ -180,4 +180,16 @@ else:
 
 #Miguel está desenvolvendo um sistema de cupons de desconto e precisa de uma forma para aplicar diferentes taxas de desconto sobre os valores das compras.Diante deste problema, crie uma closure que gere uma função capaz de calcular o preço final com um desconto fixo definido pelo usuário.
 
+def porcentagem_de_desconto(porcentagem):
 
+    def valor_da_compra(valor):
+        return (valor-(valor*(porcentagem/100)))
+    return valor_da_compra
+
+porcentagem = int(input("Digite a porcentagem que será aplicada ao desconto:"))
+
+valor = int(input("Digite o valor total da compra: "))
+
+calcular_preco_final = porcentagem_de_desconto (porcentagem)
+
+print (f"Preço final com desconto: {calcular_preco_final(valor):.2f}")
