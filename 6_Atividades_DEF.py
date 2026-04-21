@@ -193,3 +193,24 @@ valor = int(input("Digite o valor total da compra: "))
 calcular_preco_final = porcentagem_de_desconto (porcentagem)
 
 print (f"Preço final com desconto: {calcular_preco_final(valor):.2f}")
+
+#Paulo está desenvolvendo um programa para calcular valores acumulados em um sistema financeiro. Ele precisa somar os todos os números inteiros de 1 até n, onde n é um valor escolhido pelo usuário.
+
+#Ajude Paulo criando uma função recursiva que receba um número n e retorne a soma de todos os números inteiros de 1 até N.
+
+def soma_recursiva(n):
+    if n == 1:
+        return n
+    return n + soma_recursiva (n -1)
+
+try:
+    numero = int(input("Digite um número:"))
+
+    if numero > 0:
+        print(f"A soma de 1 a {numero} é: {soma_recursiva(numero)}")
+    else:
+        print("Digite um número inteiro positivo:")
+
+except ValueError:
+    print ("Utilize apenas números:")
+    
