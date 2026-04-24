@@ -67,3 +67,56 @@ texto = input("Digite um texto para a contagem de vogais: ")
 
 print(f"No texto informado contém {contagem_de_vogais(texto)} vogais!")
     
+#Sofia é revisora de textos e precisa identificar palavras muito longas em um parágrafo. Textos mais fáceis de ler costumam ter palavras curtas, então ela quer um programa que encontre palavras que tenham mais de 10 letras e as exiba em destaque. Crie um programa que receba um texto e exiba todas as palavras que possuem mais de 10 letras. Caso nenhuma palavra longa seja encontrada, o programa deve avisar o usuário.
+
+def encontrar_palavras_longas(texto):
+    if not isinstance (texto, str):
+        raise TypeError ("Por gentileza, utilizar palavras.")
+    
+    palavras = texto.strip().split()
+    palavras_longas = []
+
+    for palavra in palavras:
+        if len(palavra) > 10:
+            palavras_longas.append(palavra)
+
+    return palavras_longas
+
+texto = input("Digite um texto: ")
+
+resultado = encontrar_palavras_longas(texto)
+
+if resultado:
+    print ("Palavras longas foram encontradas:")
+    for palavra in resultado:
+        print(palavra)
+
+else:
+    print("Nenhuma palavra longa foi encontrada;")
+
+#Pedro está desenvolvendo um sistema de cadastro e precisa gerar senhas seguras para os usuários. Ele quer um programa que crie senhas aleatórias com letras maiúsculas, minúsculas, números e caracteres especiais. Crie um programa que gere uma senha aleatória de 12 caracteres, contendo pelo menos uma letra maiúscula, uma minúscula, um número e um caractere especial. Exiba a senha gerada.
+
+import random
+
+def gerar_senha_aleatoria():
+    letras_maiusculas = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+    letras_minusculas = "abcdefghijklmnopqrstuvwxyz"
+    numeros = "0123456789"
+    caracteres_especiais = "!@#$%&*"
+
+    senha = []
+
+    senha.append(random.choise(letras_maiusculas))
+    senha.append(random.choise(letras_minusculas))
+    senha.append(random.choise(numeros))
+    senha.append(random.choise(caracteres_especiais))
+
+    todos = letras_minusculas + letras_minusculas + numeros + caracteres_especiais
+
+    senha.extend(random.choices(todos, k=8))
+
+    random.shuffle(senha)
+
+    return "".join(senha)
+
+print(gerar_senha_aleatoria())
