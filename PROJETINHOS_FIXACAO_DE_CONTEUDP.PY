@@ -120,3 +120,55 @@ def gerar_senha_aleatoria():
     return "".join(senha)
 
 print(gerar_senha_aleatoria())
+
+#Lucas quer criar um jogo de pedra, papel e tesoura para jogar contra o computador. Ele precisa de um programa que permita ao usuário escolher uma opção e depois exiba o resultado da partida.
+#Crie um programa que permita ao usuário escolher entre pedra, papel ou tesoura. O computador escolherá aleatoriamente uma opção. O programa deve exibir quem venceu a partida. Lembrando que:
+#Pedra ganha de Tesoura (Pedra quebra Tesoura);
+#Tesoura ganha de Papel (Tesoura corta Papel);
+#Papel ganha de Pedra (Papel cobre Pedra);
+#Se ambos escolherem a mesma opção, é um empate.
+
+import random
+
+def pedra_papel_tesoura(escolha):
+    escolha = escolha.lower().strip()
+
+    if not escolha:
+        raise ValueError ("Sua jogada esta vazia.")
+    
+    opcoes = [
+        "tesoura",
+        "pedra",
+        "papel"
+    ]
+
+    if escolha not in opcoes:
+        raise ValueError ("Sua escolha não está dentro das opções (pedra, papel e tesoura).")
+    
+    escolha_computador = random.choice(opcoes)
+
+    vitorias = {
+        "pedra":"tesoura",
+        "papel":"pedra",
+        "tesoura":"papel"
+    }
+
+    if escolha == escolha_computador:
+        resultado = "Empate!"
+    elif vitorias[escolha] == escolha_computador:
+        resultado = "Você venceu!"
+    else:
+        resultado = "Você perdeu!"
+    
+    return escolha_computador, resultado
+
+try:
+    escolha_jogador = input("Escolha entre pedra, papel e tesoura, para jogar com o computador:")
+
+    computador, resultado = pedra_papel_tesoura(escolha_jogador)
+    
+    print(f"O computador escolheu {computador}!")    
+    print(resultado)
+    
+except ValueError as erro:
+    print(erro) 
