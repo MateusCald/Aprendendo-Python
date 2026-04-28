@@ -172,3 +172,108 @@ try:
     
 except ValueError as erro:
     print(erro) 
+
+#Maria está criando um jogo para seus alunos praticarem lógica e pensamento rápido. Ela quer um programa onde o computador escolhe um número aleatório entre 1 e 100, e o jogador tem que adivinhar qual é. Além de garantir a jogabilidade, Maria deseja que o programa trate erros de entrada, impedindo que o usuário forneça valores inválidos, como letras ou números fora do intervalo permitido. Sua tarefa é criar um programa que gere um número aleatório entre 1 e 100 e permita que o usuário tente adivinhar o número. O programa deve informar se o palpite é maior ou menor que o número correto, até que o usuário acerte. Se o usuário digitar um valor inválido ou um número fora do intervalo, uma exceção ValueError deve ser lançada .
+
+import random
+
+def advinhar_numero():
+    numero_secreto = random.randint(1, 100)
+    tentativas = 0
+
+    while True:
+        try:
+            entrada = input("Digite um número entre 1 e 100 para iniciar o jogo do número secreto: ").strip()
+
+            if entrada == "":
+                raise ValueError ("Você não digitou um número para jogar.\n")
+            
+            palpite = int(entrada)
+
+            if not 1 <= palpite <= 100:
+                raise ValueError ("Digite um número entre 1 e 100.\n")
+            
+            tentativas += 1
+
+            if palpite > numero_secreto:
+                print(f"O número secreto é menor que {palpite}!\n")
+            elif palpite < numero_secreto:
+                print(f"O número secreto é maior que {palpite}!\n")
+            else:
+                print(f"Parabéns, você acertou o número secreto em {tentativas}!")
+                print(f"O número secreto era {numero_secreto}")
+                break
+
+        except ValueError as erro:
+            print(f"Entrada inválida: {erro}\n")
+
+advinhar_numero()
+
+#Carlos está criando uma calculadora simples, mas quer garantir que o programa não quebre se o usuário digitar valores inválidos, ele precisa tratar os erros. Crie uma calculadora que permita ao usuário escolher entre soma, subtração, multiplicação e divisão. Além de modularizar o código em funções, use try-except para tratar erros de entrada inválida, que consiste em:
+#Caso digite um caractere em vez de número | exceção a ser lançada: ValueError;
+#Caso tente fazer uma divisão por 0 | exceção a ser lançada: ZeroDivisionError.
+
+def soma (a, b):
+    return a + b
+
+def subtracao (a, b):
+    return a - b
+
+def multiplicacao (a, b):
+    return a * b
+
+def divisao (a, b):
+    if b == 0:
+        raise ZeroDivisionError ("Não pode ser feita uma divisão por zero.\n")
+    return a / b
+
+def ler_numero(mensagem):
+    while True:
+        entrada = input(mensagem).strip()
+    
+        if entrada == "":
+            print("Erro: Você precisa digitar um número.\n")
+            continue
+
+        try:
+            return float(entrada)
+        except ValueError:
+            print("Erro: Digite apenas números\n")
+
+def ler_operacao(mensagem):
+    while True:
+        operacao = input(mensagem).strip()
+
+        if operacao == "":
+            print("Erro: Você precisa escolher a operação.\n")
+            continue
+        
+        if operacao in ("+", "-", "*", "/"):
+            return operacao
+        
+        print("Erro: Operação inválida, escolha entre as opções: (+, -, *, /).\n")
+
+
+def calcular ():
+    try:
+        numero1 = ler_numero("Digite o primeiro número: ")
+        operacao = ler_operacao("Digite a operação desejada (+, -, *, /):")
+        numero2 = ler_numero("Digite o segundo número: ")
+
+        if operacao == "+":
+            resultado = soma (numero1, numero2)
+        elif operacao == "-":
+            resultado = subtracao (numero1, numero2)
+        elif operacao == "*":
+            resultado = multiplicacao (numero1, numero2)
+        else:
+            resultado = divisao (numero1, numero2)
+              
+        print(f"O resultado de {numero1:0.2f} {operacao} {numero2:0.2f} é: {resultado:0.2f}")
+            
+    except ValueError as erro:
+        print(f"Erro: {erro}")
+    except ZeroDivisionError as erro:
+        print(f"Erro: {erro}")
+
+calcular()
