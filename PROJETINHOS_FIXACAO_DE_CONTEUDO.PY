@@ -277,3 +277,72 @@ def calcular ():
         print(f"Erro: {erro}")
 
 calcular()
+
+
+#Ana precisa de um programa simples para gerenciar suas tarefas diárias. Ela quer poder adicionar, visualizar e remover tarefas de uma lista. Crie um programa com um menu interativo que permita ao usuário adicionar, visualizar e remover tarefas. Use uma lista para armazenar as tarefas.
+
+def exibir_opcoes():
+    print ("\n1. Adicionar tarefas.")
+    print ("2. Visualizar Tarefas.")
+    print ("3. Remover tarefas.")
+    print ("4. Finalizar programa.\n")
+
+def adicionar_tarefa(tarefas):
+    tarefa = input("Digite a tarefa que deseja adicionar: ").strip()
+    
+    if tarefa:
+        tarefas.append(tarefa)
+    else:
+        print ("Erro: A tarefa não pode estar vazia.")    
+
+def visualizar_tarefas(tarefas):
+    if tarefas:
+        print("\nLista de tarefas:")
+        for i, tarefa in enumerate(tarefas, start=1):
+            print(f"{i}. {tarefa}")
+    else:
+        print("Nenhuma terefa foi encontrada.")
+
+def remover_tarefas(tarefas):
+    visualizar_tarefas(tarefas)
+
+    if tarefas:
+        try:
+            tarefa_para_excluir = int(input("Digite a tarefa que deseja remover: "))
+            tarefas.pop(tarefa_para_excluir - 1)
+            print("Tarefa removida com sucesso.")
+        except:
+            print("Opção inválida.")
+    
+def escolher_opcoes(tarefas):
+    try:
+        opcao_escolhida = int(input("Escolha uma das opções:").strip())
+
+        if opcao_escolhida == 1:
+            adicionar_tarefa(tarefas)
+        elif opcao_escolhida == 2:
+            visualizar_tarefas(tarefas)
+        elif opcao_escolhida == 3:
+            remover_tarefas(tarefas)
+        elif opcao_escolhida == 4:
+            return False
+        else:
+            print("Opção inválida.")
+    except:
+        print("Opção inválida.")
+
+    return True
+
+def main():
+    tarefas = []
+
+    while True:
+        exibir_opcoes()
+        continuar = escolher_opcoes(tarefas)
+
+        if not continuar:
+            print("Encerrando programa...")
+            break
+
+main()
+        
